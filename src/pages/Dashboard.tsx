@@ -7,18 +7,21 @@ import {
   Clock, 
   Users, 
   Settings, 
-  Plus, 
   ArrowLeft,
   ExternalLink,
   TrendingUp,
-  CheckCircle,
-  XCircle,
-  AlertCircle
+  MapPin,
+  Crown,
+  ClipboardList
 } from 'lucide-react';
 import { DashboardOverview } from '@/components/dashboard/DashboardOverview';
 import { ServicesManager } from '@/components/dashboard/ServicesManager';
 import { ScheduleManager } from '@/components/dashboard/ScheduleManager';
 import { BookingsManager } from '@/components/dashboard/BookingsManager';
+import { ProvidersManager } from '@/components/dashboard/ProvidersManager';
+import { LocationsManager } from '@/components/dashboard/LocationsManager';
+import { MembershipManager } from '@/components/dashboard/MembershipManager';
+import { WaitingListManager } from '@/components/dashboard/WaitingListManager';
 import { mockBusiness } from '@/data/mockData';
 
 export default function Dashboard() {
@@ -53,7 +56,7 @@ export default function Dashboard() {
       </header>
 
       {/* Main Content */}
-      <main className="pb-20">
+      <main className="pb-24">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsContent value="overview" className="mt-0 px-4 py-6">
             <DashboardOverview />
@@ -67,40 +70,84 @@ export default function Dashboard() {
             <ServicesManager />
           </TabsContent>
 
+          <TabsContent value="providers" className="mt-0 px-4 py-6">
+            <ProvidersManager />
+          </TabsContent>
+
+          <TabsContent value="locations" className="mt-0 px-4 py-6">
+            <LocationsManager />
+          </TabsContent>
+
           <TabsContent value="schedule" className="mt-0 px-4 py-6">
             <ScheduleManager />
           </TabsContent>
 
-          {/* Bottom Navigation */}
-          <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border px-2 py-2 z-20">
-            <TabsList className="w-full h-auto bg-transparent gap-1">
+          <TabsContent value="membership" className="mt-0 px-4 py-6">
+            <MembershipManager />
+          </TabsContent>
+
+          <TabsContent value="waitlist" className="mt-0 px-4 py-6">
+            <WaitingListManager />
+          </TabsContent>
+
+          {/* Bottom Navigation - Scrollable */}
+          <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border px-2 py-2 z-20 overflow-x-auto">
+            <TabsList className="w-max min-w-full h-auto bg-transparent gap-1 flex">
               <TabsTrigger
                 value="overview"
-                className="flex-1 flex flex-col items-center gap-1 py-2 px-1 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
+                className="flex-shrink-0 flex flex-col items-center gap-1 py-2 px-3 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
               >
                 <TrendingUp className="w-5 h-5" />
                 <span className="text-xs">Overview</span>
               </TabsTrigger>
               <TabsTrigger
                 value="bookings"
-                className="flex-1 flex flex-col items-center gap-1 py-2 px-1 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
+                className="flex-shrink-0 flex flex-col items-center gap-1 py-2 px-3 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
               >
                 <Calendar className="w-5 h-5" />
                 <span className="text-xs">Bookings</span>
               </TabsTrigger>
               <TabsTrigger
                 value="services"
-                className="flex-1 flex flex-col items-center gap-1 py-2 px-1 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
+                className="flex-shrink-0 flex flex-col items-center gap-1 py-2 px-3 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
               >
                 <Settings className="w-5 h-5" />
                 <span className="text-xs">Services</span>
               </TabsTrigger>
               <TabsTrigger
+                value="providers"
+                className="flex-shrink-0 flex flex-col items-center gap-1 py-2 px-3 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
+              >
+                <Users className="w-5 h-5" />
+                <span className="text-xs">Staff</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="locations"
+                className="flex-shrink-0 flex flex-col items-center gap-1 py-2 px-3 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
+              >
+                <MapPin className="w-5 h-5" />
+                <span className="text-xs">Locations</span>
+              </TabsTrigger>
+              <TabsTrigger
                 value="schedule"
-                className="flex-1 flex flex-col items-center gap-1 py-2 px-1 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
+                className="flex-shrink-0 flex flex-col items-center gap-1 py-2 px-3 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
               >
                 <Clock className="w-5 h-5" />
                 <span className="text-xs">Schedule</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="membership"
+                className="flex-shrink-0 flex flex-col items-center gap-1 py-2 px-3 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
+              >
+                <Crown className="w-5 h-5" />
+                <span className="text-xs">Loyalty</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="waitlist"
+                className="flex-shrink-0 flex flex-col items-center gap-1 py-2 px-3 data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-lg"
+              >
+                <ClipboardList className="w-5 h-5" />
+                <span className="text-xs">Waitlist</span>
               </TabsTrigger>
             </TabsList>
           </div>
